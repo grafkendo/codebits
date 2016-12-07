@@ -1,0 +1,20 @@
+
+function rot13(str) { // LBH QVQ VG!
+  var decoded = "";
+  var RegX = /[A-Z]/;
+  //return str.charCodeAt(0);
+  for(var i =0;i<str.length;i++){
+    var chr =str.charAt(i);
+    var shft =
+    if(RegX.test( chr)){//. if the character of str at i matches the pattern...
+      decoded += chr;
+    }else decoded += chr;
+    
+   // decoded += String.fromCharCode(str.charCodeAt(i)+13);
+  }
+  return RegX.test("a");
+  
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");
