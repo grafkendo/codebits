@@ -1,0 +1,21 @@
+//using json object called myQuotes
+
+function pickQuote() {
+   //pick random quote from json object
+   var theQuote = Math.floor(Math.random() * (myQuotes.length));
+   // jquery target the html #id set html to selected quotes text value
+   $("#quote").html(myQuotes[theQuote].text);
+   // jquery target the html #id set html to selected quotes author value
+   $("#attrib").html(myQuotes[theQuote].author);
+   // jquery target html #id set href attribute to twitter api tweet intent + the text value of theQuote
+   $("#tweetButton").attr("href", "http://twitter.com/intent/tweet?text=" + myQuotes[theQuote].quote + " -" + myQuotes[theQuote].attrib);
+ }
+ // wait for doc to load page
+ $(document).ready(function() {
+   //load first quote by calling my flipper function above
+   pickQuote();
+   // hey jquery call for new quote with button onclick event
+   $("#generateButton").on("click", function() {
+     pickQuote();
+   });
+ });
