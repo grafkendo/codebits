@@ -1,0 +1,13 @@
+$(document).ready(function(){
+$.ajax({
+ type: 'GET',
+ url: 'https://api.twitch.tv/kraken/channels/twitch',
+ headers: {
+   'Client-ID': 'bjqql18qexcz9ca3xtxg371ppj369z'
+ },
+ success: function(data) {
+   console.log(data);
+ }
+});
+  
+  });
