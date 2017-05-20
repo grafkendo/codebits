@@ -1,0 +1,10 @@
+ var foo = this.$fixture = $([
+  "<div id='mainbox'>",
+  //"  <div class='streamerBox'> "+streamName+"</div>",
+ // "<div class='titleDiv'>"+streamName+"</div>",
+  "</div>"
+].join("\n"));
+
+
+$('#someID')append(foo);
+    
