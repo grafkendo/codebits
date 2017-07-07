@@ -1,0 +1,24 @@
+class myOuterClass{
+  
+   private String privateMember ="";
+ 
+  class innerClass{
+    public innerClass(){
+    
+    privateMember = "foo";
+    
+    }
+    public void process(){
+    
+    // this process is only used as a utillity to the outerClass
+    //
+    
+    }
+  
+   
+  }
+ 
+ 
+ 
+ 
+ }
