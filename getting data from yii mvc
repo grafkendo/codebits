@@ -1,0 +1,75 @@
+
+
+
+
+
+
+
+<?php 
+                    $criteria = new CDbCriteria();
+                    
+                    $criteria->addCondition("type = :type");
+                    $criteria->params = array(':type' => 2);
+        
+                    $roles = CHtml::listData(AuthItem::model()->findAll($criteria), 'name', 'name'); 
+                ?>
+                
+                
+                
+                
+  // in user Model
+public static function sendCreateEmail($email, $username, $password) {
+            mail($email, "{$username}, Your Ada Account Credentials", 
+                "Hello {$username},\n\n" . 
+                "Your temporary Ada password is: {$password}\n\n" . 
+                "Please login to Ada at " . Yii::app()->getBaseUrl(true) . " to set set your password to something more permanent.", 
+                "From: techsupport@cheatsheet.com\r\nReply-To: techsupport@cheatsheet.com"
+            );
+        }
+        
+        
+        
+        // in the
+        
+        
+        
+        // in controller
+        
+        /**
+     * Creates a new model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     */
+    public function actionCreate()
+    {
+        $model=new User;
+
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if(isset($_POST['User']))
+        {
+            $model->username = $_POST['User']['username'];
+            $model->email = $_POST['User']['email'];
+            
+            $model->save();
+            
+            $model->password = User::getHashedPassword($model->id, $_POST['User']['password']);
+            $model->password_reset = $_POST['User']['password_reset'];
+            
+            $model->save();
+
+
+            if($model->save()) {
+                if(!empty($_POST['User']['role'])) {
+                    Yii::app()->authManager->assign($_POST['User']['role'],$model->id);
+                }
+                
+                User::sendCreateEmail($_POST['User']['email'], $_POST['User']['username'], $_POST['User']['password']);
+                        }
+        }
+
+        $this->render('create',array(
+            'model'=>$model,
+        ));
+    }
+        
